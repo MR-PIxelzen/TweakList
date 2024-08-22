@@ -1,5 +1,7 @@
 # Path to the .ini file
 $iniFilePath = "$env:LocalAppData\EpicGamesLauncher\Saved\Config\Windows\GameUserSettings.ini"
+# Backup the original file if it exists
+if (Test-Path -Path $iniFilePath) {
 Stop-Process -Name "Epic*" -Force
 # Define the replacements
 $replacements = @{
@@ -33,5 +35,7 @@ foreach ($key in $replacements.Keys) {
     if ($updatedLine) {
         Write-Host $updatedLine
     }
+}
+
 }
 #Write-Host "The specified keys have been updated to 'True' in '$iniFilePath'."
